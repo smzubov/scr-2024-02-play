@@ -1,3 +1,4 @@
+GET /                          controllers.IndexController.index
 GET /action1                   controllers.IndexController.action1
 GET /action2                   controllers.IndexController.action2
 GET /action3                   controllers.IndexController.action3
@@ -14,3 +15,10 @@ GET /action13                  controllers.IndexController.action13
 GET /action14/:userId          controllers.IndexController.action14(userId: models.UserId)
 GET /action15                  controllers.IndexController.action15(paging: Option[models.Paging] ?= None)
 POST /action18                 controllers.IndexController.action18
+POST /action19                 controllers.IndexController.action19
+GET  /login                    controllers.IndexController.loginPage()
+POST /login                    controllers.IndexController.loginFormSubmit()
+
+# Product routes
+
+GET  /products/list           controllers.ProductController.list

@@ -1,6 +1,9 @@
 package controllers
 
+import models.dto.LoginDTO
 import models.{Paging, User, UserId}
+import play.api.data.{Form, Forms, Mapping}
+import play.api.data.Forms.{email, mapping, nonEmptyText}
 import play.api.libs.json.{JsValue, Json, Writes}
 import play.api.mvc.{Action, AnyContent, Controller, Cookie, DiscardingCookie}
 
@@ -100,6 +103,45 @@ object IndexController extends Controller{
     val body: User = rc.body
     Ok(body.toString)
   }
+
+  def action19 = Action(parse.json[User]){ rc =>
+    val body: User = rc.body
+    val jsValue: JsValue = Json.toJson(body)
+    Ok(jsValue)
+  }
+
+  def index = Action{
+    Ok(views.html.index())
+  }
+
+  val mapping: Mapping[(String, String)] = Forms.tuple(
+    "email" -> email,
+    "password" -> nonEmptyText(minLength = 6)
+  )
+
+  val mapping2: Mapping[LoginDTO] = Forms.mapping(
+    "email" -> email,
+    "password" -> nonEmptyText(minLength = 6)
+  )(LoginDTO.apply)(LoginDTO.unapply)
+
+  val form: Form[LoginDTO] = Form(mapping2)
+
+  def loginPage = Action{
+    Ok(views.html.login(form))
+  }
+
+  def loginFormSubmit() = Action{ implicit req =>
+    form.bindFromRequest.fold(
+      formWithErrors => BadRequest(views.html.login(formWithErrors)),
+      dto =>
+        // some logging logic
+        Redirect(routes.IndexController.index())
+          .withSession("email" -> dto.email)
+    )
+  }
+
+
+
 
 }
 
