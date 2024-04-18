@@ -13,7 +13,7 @@ object Foo{
   implicit val writer: Writes[Foo] = Json.writes[Foo]
 }
 
-object IndexController extends Controller{
+object IndexController extends Authorization {
 
   def action1 = Action{
     Ok
@@ -130,7 +130,7 @@ object IndexController extends Controller{
     Ok(views.html.login(form))
   }
 
-  def loginFormSubmit() = Action{ implicit req =>
+  def loginFormSubmit() = authorize{ implicit req =>
     form.bindFromRequest.fold(
       formWithErrors => BadRequest(views.html.login(formWithErrors)),
       dto =>

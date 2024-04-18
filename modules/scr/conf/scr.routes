@@ -1,0 +1,24 @@
+GET /                          controllers.IndexController.index
+GET /action1                   controllers.IndexController.action1
+GET /action2                   controllers.IndexController.action2
+GET /action3                   controllers.IndexController.action3
+GET /action4                   controllers.IndexController.action4
+GET /action5                   controllers.IndexController.action5
+GET /action6                   controllers.IndexController.action6
+GET /action7/:number           controllers.IndexController.action7(number: Int)
+GET /action8                   controllers.IndexController.action8(number: Int ?= 0)
+GET /action9                   controllers.IndexController.action9
+GET /action10                  controllers.IndexController.action10
+GET /action11                  controllers.IndexController.action11
+GET /action12                  controllers.IndexController.action12
+GET /action13                  controllers.IndexController.action13
+GET /action14/:userId          controllers.IndexController.action14(userId: models.UserId)
+GET /action15                  controllers.IndexController.action15(paging: Option[models.Paging] ?= None)
+POST /action18                 controllers.IndexController.action18
+POST /action19                 controllers.IndexController.action19
+GET  /login                    controllers.IndexController.loginPage()
+POST /login                    controllers.IndexController.loginFormSubmit()
+
+# Product routes
+
+GET  /products/list            @controllers.ProductController.list
