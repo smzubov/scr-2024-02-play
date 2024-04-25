@@ -43,4 +43,52 @@
               referencedTableName="Address"/>
         </changeSet>
 
+        <changeSet id="create table Author" author="avoronets">
+            <createTable tableName="Author">
+                <column name="id" type="text">
+                    <constraints primaryKey="true"/>
+                </column>
+                <column name="name" type="text">
+                    <constraints nullable="false"/>
+                </column>
+            </createTable>
+            <createTable tableName="Song">
+                <column name="id" type="text">
+                    <constraints primaryKey="true"/>
+                </column>
+                <column name="title" type="text">
+                    <constraints nullable="false"/>
+                </column>
+                <column name="author" type="text"></column>
+            </createTable>
+            <addForeignKeyConstraint
+                    baseTableName="Song"
+                    baseColumnNames="author"
+                    constraintName="fk_toAuthor"
+                    referencedTableName="Author"
+                                     referencedColumnNames="id"/>
+            <createTable tableName="PlayList">
+                <column name="id" type="text">
+                    <constraints primaryKey="true"/>
+                </column>
+                <column name="title" type="text">
+                    <constraints nullable="false"/>
+                </column>
+            </createTable>
+
+            <createTable tableName="SongsToPlayList">
+                <column name="id" type="text">
+                    <constraints primaryKey="true"/>
+                </column>
+                <column name="songId" type="text"></column>
+                <column name="playListId" type="text"></column>
+            </createTable>
+            <addForeignKeyConstraint baseTableName="SongsToPlayList" baseColumnNames="songId" constraintName="fk_toSong"
+                                     referencedTableName="Song"
+                                     referencedColumnNames="id"/>
+            <addForeignKeyConstraint baseTableName="SongsToPlayList" baseColumnNames="playListId" constraintName="fk_toPlayList"
+                                     referencedTableName="PlayList"
+                                     referencedColumnNames="id"/>
+        </changeSet>
+
 </databaseChangeLog>

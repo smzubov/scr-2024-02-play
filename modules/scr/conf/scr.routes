@@ -26,3 +26,8 @@ GET  /products/list            @controllers.ProductController.list
 # PhoneBook
 
 GET  /phones/list              @controllers.PhoneBookController.list()
+GET  /phones/testCrud          @controllers.PhoneBookController.testCrud()
+
+# Songs
+
+GET  /songs/                   @controllers.SongController.test()

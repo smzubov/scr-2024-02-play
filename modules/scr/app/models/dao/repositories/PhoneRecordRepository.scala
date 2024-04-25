@@ -2,6 +2,8 @@ package models.dao.repositories
 
 import models.dao.entities.{Address, PhoneRecord}
 import models.dao.schema.PhoneBookSchema
+import org.squeryl.Table
+import org.squeryl.dsl.ast.LogicalBoolean
 
 
 trait PhoneRecordRepository {
@@ -59,4 +61,15 @@ class PhoneRecordRepositoryImpl extends PhoneRecordRepository{
 
   override def delete(id: String): Unit =
     transaction(phoneRecords.deleteWhere(_.id === id))
+}
+
+trait PhoneRecordRepositoryCRUD extends CrudRepository[String, PhoneRecord]
+
+class PhoneRecordRepositoryCRUDImpl extends PhoneRecordRepositoryCRUD{
+  override val defaultTable: Table[PhoneRecord] = PhoneBookSchema.phoneRecords
+}
+
+object PhoneRecordFilters{
+  import org.squeryl.PrimitiveTypeMode._
+  def phoneFilter(phone: String): PhoneRecord => LogicalBoolean = _.phone === phone
 }

@@ -2,11 +2,14 @@ package controllers
 
 import com.google.inject.Inject
 import models.dao.entities.{Address, PhoneRecord}
-import models.dao.repositories.PhoneRecordRepository
+import models.dao.repositories.{PhoneRecordFilters, PhoneRecordRepository, PhoneRecordRepositoryCRUD}
 import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
 
-class PhoneBookController @Inject()(val phoneRecordRepository: PhoneRecordRepository) extends Controller{
+class PhoneBookController @Inject()(
+                                     val phoneRecordRepository: PhoneRecordRepository,
+                                     val phoneRecordRepositoryCrud: PhoneRecordRepositoryCRUD
+                                   ) extends Controller{
   implicit val writes = Json.writes[PhoneRecord]
 
   def list() = Action{
@@ -22,5 +25,10 @@ class PhoneBookController @Inject()(val phoneRecordRepository: PhoneRecordReposi
 
     val result: List[PhoneRecord] = phoneRecordRepository.list()
     Ok(Json.toJson(result))
+  }
+
+  def testCrud() = Action{
+    val l = phoneRecordRepositoryCrud.list(PhoneRecordFilters.phoneFilter("1234"))
+    Ok(Json.toJson(l))
   }
 }
