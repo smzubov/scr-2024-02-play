@@ -1,4 +1,4 @@
-
+GET /                          controllers.IndexController.index
 GET /action1                   controllers.IndexController.action1
 GET /action2                   controllers.IndexController.action2
 GET /action3                   controllers.IndexController.action3
@@ -15,11 +15,19 @@ GET /action13                  controllers.IndexController.action13
 GET /action14/:userId          controllers.IndexController.action14(userId: models.UserId)
 GET /action15                  controllers.IndexController.action15(paging: Option[models.Paging] ?= None)
 POST /action18                 controllers.IndexController.action18
+POST /action19                 controllers.IndexController.action19
+GET  /login                    controllers.IndexController.loginPage()
+POST /login                    controllers.IndexController.loginFormSubmit()
 
 # Product routes
 
-GET     /products           controllers.ProductController.getProducts
-POST    /products           controllers.ProductController.addProduct
-PUT     /products       controllers.ProductController.updateProduct
-DELETE  /products/:id       controllers.ProductController.deleteProduct(id: String)
-GET     /products/:title    controllers.ProductController.filterProductsByTitle(title: String)
+GET  /products/list            @controllers.ProductController.list
+
+# PhoneBook
+
+GET  /phones/list              @controllers.PhoneBookController.list()
+GET  /phones/testCrud          @controllers.PhoneBookController.testCrud()
+
+# Songs
+
+GET  /songs/                   @controllers.SongController.test()

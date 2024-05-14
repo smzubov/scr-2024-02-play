@@ -1,6 +1,6 @@
 package models
 
-import play.api.libs.json.{JsPath, Json}
+import play.api.libs.json.{JsPath, JsValue, Json, Writes}
 import play.api.mvc.PathBindable
 
 case class UserId(raw: Int)
@@ -15,4 +15,5 @@ object UserId{
   }
 
   implicit val reads = Json.reads[UserId]
+  implicit val writes: Writes[UserId] = Json.writes[UserId]
 }
