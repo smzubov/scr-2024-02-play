@@ -14,3 +14,11 @@ GET /action13                  controllers.IndexController.action13
 GET /action14/:userId          controllers.IndexController.action14(userId: models.UserId)
 GET /action15                  controllers.IndexController.action15(paging: Option[models.Paging] ?= None)
 POST /action18                 controllers.IndexController.action18
+
+# Product routes
+
+GET     /products           controllers.ProductController.getProducts
+POST    /products           controllers.ProductController.addProduct
+PUT     /products       controllers.ProductController.updateProduct
+DELETE  /products/:id       controllers.ProductController.deleteProduct(id: String)
+GET     /products/:title    controllers.ProductController.filterProductsByTitle(title: String)
