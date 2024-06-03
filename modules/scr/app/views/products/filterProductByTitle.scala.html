@@ -1,0 +1,26 @@
+@import models.dto.ProductDTO
+@import models.dto.ProductItemDTO
+
+@(title: String, products: Seq[ProductDTO], productItems: Seq[Seq[ProductItemDTO]])
+
+@main("Filtered Products") {
+    <h1>Products with Title: @title</h1>
+    @if(products.isEmpty) {
+        <p>No products found with title @title</p>
+    } else {
+        @for(i <- products.indices) {
+            <h2>Product: @products(i).title</h2>
+            <p>Description: @products(i).description</p>
+            <h3>Product Items:</h3>
+            @for(item <- productItems(i)) {
+                <div>
+                    <p>ID: @item.id</p>
+                    <p>Price: @item.price</p>
+                    <p>Quantity: @item.quantity</p>
+                    <p>In Stock: @item.inStock</p>
+                </div>
+            }
+        }
+    }
+}
+

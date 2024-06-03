@@ -1,0 +1,22 @@
+@import models.dto.ProductDTO
+@import models.dto.ProductItemDTO
+
+@(productId: String, productForm: Form[ProductDTO], productItems: Seq[ProductItemDTO])
+
+@main("Update Product") {
+    <h1>Update Product @productId</h1>
+    @helper.form(action = routes.ProductController.updateProduct()) {
+        @helper.inputText(productForm("id"))
+        @helper.inputText(productForm("title"))
+        @helper.inputText(productForm("description"))
+        @for(item <- productItems) {
+            <div>
+                @helper.inputText(productForm(s"productItems[${item.id}].id"), '_label -> s"Product Item ID ${item.id}")
+                @helper.inputText(productForm(s"productItems[${item.id}].price"), '_label -> s"Product Item Price ${item.id}")
+                @helper.inputText(productForm(s"productItems[${item.id}].quantity"), '_label -> s"Product Item Quantity ${item.id}")
+                @helper.inputText(productForm(s"productItems[${item.id}].inStock"), '_label -> s"Product Item In Stock ${item.id}")
+            </div>
+        }
+        <button type="submit">Update</button>
+    }
+}

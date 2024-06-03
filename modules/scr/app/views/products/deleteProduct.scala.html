@@ -1,0 +1,9 @@
+@(productId: String)
+
+@main("Delete Product") {
+    <h1>Delete Product @productId</h1>
+    <p>Are you sure you want to delete product @productId?</p>
+    <form action="@routes.ProductController.deleteProduct(productId)" method="post">
+        <button type="submit">Delete</button>
+    </form>
+}

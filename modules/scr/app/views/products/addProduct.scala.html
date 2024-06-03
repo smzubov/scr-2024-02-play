@@ -1,0 +1,28 @@
+@import models.dto.ProductDTO
+@import models.dto.ProductItemDTO
+
+@(productForm: Form[ProductDTO], productItems: List[ProductItemDTO])
+
+@import helper._
+
+@main("Add Product") {
+    <h1>Add Product</h1>
+    @form(action = routes.ProductController.addProduct(), 'id -> "addProductForm") {
+        @inputText(productForm("id"))
+        @inputText(productForm("title"))
+        @inputText(productForm("description"))
+        <div id="productItems">
+            <h3>Product Items</h3>
+            @for(item <- productItems) {
+                <div>
+                    @helper.inputText(productForm(s"productItems[${item.id}].id"), '_label -> s"Product Item ID ${item.id}")
+                    @helper.inputText(productForm(s"productItems[${item.id}].price"), '_label -> s"Product Item Price ${item.id}")
+                    @helper.inputText(productForm(s"productItems[${item.id}].quantity"), '_label -> s"Product Item Quantity ${item.id}")
+                    @helper.inputText(productForm(s"productItems[${item.id}].inStock"), '_label -> s"Product Item In Stock ${item.id}")
+                </div>
+            }
+        </div>
+        <input type="button" value="Add Product Item" id="addProductItemButton">
+        <input type="submit" value="Submit">
+    }
+}

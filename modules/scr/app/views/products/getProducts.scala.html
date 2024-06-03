@@ -1,0 +1,15 @@
+@(productList: List[(models.dto.ProductDTO, List[models.dto.ProductItemDTO])])
+
+@main("Product List") {
+    <h1>Product List</h1>
+    <ul>
+    @for((product, items) <- productList) {
+        <li>@product.id: @product.title - @product.description</li>
+        <ul>
+        @for(item <- items) {
+            <li>@item.id: Price - @item.price, Quantity - @item.quantity, In Stock - @item.inStock</li>
+        }
+        </ul>
+    }
+    </ul>
+}

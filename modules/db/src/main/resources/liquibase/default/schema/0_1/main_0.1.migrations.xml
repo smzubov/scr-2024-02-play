@@ -19,12 +19,11 @@
           </createTable>
         </changeSet>
 
-        
-        
+
         <changeSet id="create PhoneRecord table" author="avoronets">
           <createTable tableName="PhoneRecord">
               <column name="id" type="text">
-                <constraints primaryKey="true" nullable="false"/> 
+                <constraints primaryKey="true" nullable="false"/>
               </column>
               <column name="phone" type="text">
                 <constraints nullable="false"/>
@@ -59,7 +58,7 @@
                 <column name="title" type="text">
                     <constraints nullable="false"/>
                 </column>
-                <column name="author" type="text"></column>
+                <column name="author" type="text"/>
             </createTable>
             <addForeignKeyConstraint
                     baseTableName="Song"
@@ -80,8 +79,8 @@
                 <column name="id" type="text">
                     <constraints primaryKey="true"/>
                 </column>
-                <column name="songId" type="text"></column>
-                <column name="playListId" type="text"></column>
+                <column name="songId" type="text"/>
+                <column name="playListId" type="text"/>
             </createTable>
             <addForeignKeyConstraint baseTableName="SongsToPlayList" baseColumnNames="songId" constraintName="fk_toSong"
                                      referencedTableName="Song"
@@ -91,4 +90,45 @@
                                      referencedColumnNames="id"/>
         </changeSet>
 
+
+    <changeSet id="create Product table" author="sergejzubov">
+        <createTable tableName="Product">
+            <column name="id" type="text">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="text">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create table ProductItem" author="sergejzubov">
+        <createTable tableName="ProductItem">
+            <column name="id" type="text">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="price" type="number">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="number">
+                <constraints nullable="false"/>
+            </column>
+            <column name="inStock" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="productId" type="text">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="productId"
+                                 baseTableName="ProductItem"
+                                 constraintName="fk_productitem_product"
+                                 referencedColumnNames="id"
+                                 referencedTableName="Product"/>
+    </changeSet>
+
 </databaseChangeLog>
+
