@@ -19,9 +19,6 @@ POST /action19                 controllers.IndexController.action19
 GET  /login                    controllers.IndexController.loginPage()
 POST /login                    controllers.IndexController.loginFormSubmit()
 
-# Product routes
-
-GET  /products/list            @controllers.ProductController.list
 
 # PhoneBook
 
@@ -31,3 +28,11 @@ GET  /phones/testCrud          @controllers.PhoneBookController.testCrud()
 # Songs
 
 GET  /songs/                   @controllers.SongController.test()
+
+#  Products
+
+POST    /products/addProduct                            @controllers.ProductController.addProduct()
+PUT    /products/updateProduct                          @controllers.ProductController.updateProduct()
+GET     /products/deleteProduct/:id                     @controllers.ProductController.deleteProduct(id: String)
+GET     /products/getProducts                           @controllers.ProductController.getProducts()
+GET     /products/filterProductsByTitle/:title          @controllers.ProductController.filterProductsByTitle(title: String)
